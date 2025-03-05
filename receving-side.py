@@ -1,12 +1,19 @@
-import socket
+import establishing_connection
 
-my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+PORT = 5000
+recever_socket = establishing_connection.create_receving_socket(PORT)
+print(f"Server listening on port {PORT}...")
+
+conn, addr = recever_socket.accept()
+print(f"Connected by {addr}")
 
 while True:
-    my_socket.bind(('', 5000))
-    my_socket.listen()
-    conn, addr = my_socket.accept()
-    recevid_massege = conn.recv(1024).decode('utf-8')
-    print(str(recevid_massege))
-    my_socket.close()
+    data = conn.recv(1024)
+    if not data:
+        break
+    print("-|", data.decode('utf-8'))
+
+conn.close()
+recever_socket.close()
+print("Server closed.")
 

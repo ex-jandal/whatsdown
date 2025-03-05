@@ -1,12 +1,16 @@
-import socket
+import establishing_connection
 
-distantion_ip = input("Enter the destrantion IP: ")
-send_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+PORT = 5000
+destination_ip = establishing_connection.get_ip()
 
+sender_socket = establishing_connection.create_sending_socket(destination_ip, PORT)
+print(f"Connected to {destination_ip}:{PORT}")
 
 while True:
-    send_socket.connect((distantion_ip, 5000))
-    massege = input("$ ")
-    send_socket.send(massege.encode('utf-8'))
-    print(type(massege))
-    # send_socket.close()
+    message = input("-> ")
+    if not message:  
+        break
+    sender_socket.send(message.encode('utf-8'))
+
+sender_socket.close()
+print("Client closed.")

@@ -1,11 +1,8 @@
 from prompt_toolkit import prompt
-# from prompt_toolkit.patch_stdout import patch_stdout
 
 def sending_massege(sender_socket, is_true: bool):
     while True:
-        user_input = prompt("->> : ")
-        print("-> ", user_input)
-
+        user_input = prompt(">->> ")
 
         if not user_input:  
             break

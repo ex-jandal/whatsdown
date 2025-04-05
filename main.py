@@ -3,7 +3,6 @@ import time
 import establishing_connection
 import receving_side
 import sending_side
-import sys
 
 
 ask_user = ["Create chatroom.", "Join to chatroom."]
@@ -24,8 +23,6 @@ main_port = establishing_connection.get_port()
 dest_port = main_port + 1 if is_admin == 1 else main_port
 my_port = main_port if is_admin == 1 else main_port + 1
 
-print(dest_port, my_port)
-
 print("Whiting for a connection")
 while True:
     try:
@@ -45,8 +42,6 @@ while True:
         time.sleep(1)
         continue
 
-# Create a prompt session for a more dynamic input experience.
-# session = PromptSession("-> ")
 def income():
     print(f"receving from {dest_ip}:{dest_port}")
     receving_side.receving_massege(recever_socket, True)
@@ -54,8 +49,5 @@ def income():
 def outcome():
     sending_side.sending_massege(sender_socket, True)
 
-# import socket
-# sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 threading.Thread(target=income).start()
-threading.Thread(target=outcome).start()
-# outcome()
+outcome()

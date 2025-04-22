@@ -1,4 +1,4 @@
-# Whatsdown
+# ***Whatsdown***
 
 Whatsdown is a lightweight, LAN-based CLI messaging app built with Python. With Whatsdown, you can easily create or join chatrooms on your local network. It uses Python's standard libraries along with `prompt_toolkit` for a smooth, non-interruptive user interface.
 
@@ -9,7 +9,7 @@ Whatsdown is a lightweight, LAN-based CLI messaging app built with Python. With 
 - **Create or Join Chatrooms:** Choose to either host a chatroom or join an existing one.
 - **LAN Networking:** Connect with a partner on the same local network.
 - **Asynchronous Messaging:** Enjoy uninterrupted typing while incoming messages are handled seamlessly.
-- **Clean CLI Interface:** Uses `prompt_toolkit` to ensure incoming messages do not interfere with your input.
+- **Clean CLI Interface:** Uses `prompt_toolkit` to ensure incoming messages do not interfere with your inputs.
 
 ---
 
@@ -20,28 +20,28 @@ Whatsdown is built with Python and requires the following libraries:
 - `socket`
 - `threading`
 - `time`
-- [`prompt_toolkit`](https://python-prompt-toolkit.readthedocs.io/) (includes `prompt` and `patch_stdout`)
+- [`prompt_toolkit`](https://python-prompt-toolkit.readthedocs.io/)
 
 ### Installation via Package Managers
 
-Depending on your operating system, you can install `prompt_toolkit` using your system's package manager:
+Depending on your operating system, you can install `python` and `prompt_toolkit` using your system's package manager:
 
 - **Debian/Ubuntu:**
   ```bash
-  sudo apt install python3-prompt_toolkit
+  sudo apt update -y && apt install python3 python3-prompt_toolkit
   ```
 
 - **Arch Linux (Pacman):**
   ```bash
-  sudo pacman -S python-prompt_toolkit
+  sudo pacman -S python python-prompt_toolkit
   ```
 
-- **Fedora:**
+- **Fedora** (Python is already installed):
   ```bash
   sudo dnf install python3-prompt_toolkit
   ```
 
-If your distribution doesn’t support these packages directly, you can always install via pip:
+If your distribution doesn’t support these packages directly, you can always install `prompt_toolkit` via pip:
 
 ```bash
 pip install prompt_toolkit
@@ -68,7 +68,7 @@ pip install prompt_toolkit
    ```
 
 3. **Enter Partner Port:**  
-   The app will then ask for a port number, with a suggestion to choose one between 49152 and 65535:
+   The app will then ask for a port number, with a force to choose one between 49152 and 65535:
    ```plaintext
    Enter your partner PORT (choose between 49152 and 65535):
    ```
@@ -80,18 +80,17 @@ pip install prompt_toolkit
 
 ## Usage
 
-Simply run the Whatsdown Python script. The app will guide you through creating or joining a chatroom with clear prompts in your terminal.
+Simply clone and run the Whatsdown Python script. The app will guide you through creating or joining a chatroom with clear prompts in your terminal.
 
 ```bash
+git clone https://github.com/ex-jandal/whatsdown.git ~/whatsdown
+cd ~/whatsdown
 python main.py
 ```
 
 ---
 
 ## Troubleshooting
-
-- **Incoming Messages Interrupting Your Input:**  
-  If you experience input interruptions when a message is received, ensure that you're using `prompt_toolkit`’s `patch_stdout()` within your receive thread. This helps to temporarily redirect stdout and prevent overlapping with your input prompt.
 
 - **Connection Issues:**  
   - Verify that both parties are on the same LAN.
@@ -112,8 +111,11 @@ A: No, Whatsdown only requires Python and the listed libraries. For `prompt_tool
 A: Whatsdown is designed for LAN usage. For internet usage, you would need to configure port forwarding and take additional security measures.
 
 **Q: What happens if my partner disconnects?**  
-A: The app will print a connection error. You can restart the app and try reconnecting.
+A: The app will print a alert and close your partner socket if you partner sent you an empty message. if you partner interrupt or close the app, the app will show you an error message.  You can restart the app and try reconnecting again if you or your partner do it by mistake.
 
 ---
 
 Enjoy chatting on your LAN with Whatsdown! If you encounter any issues or have further questions, feel free to consult this README for guidance.
+
+---  
+<span style="color: orange;">Done</span> With ❤️ by ***Sultan Majed***

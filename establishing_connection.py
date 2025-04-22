@@ -1,7 +1,7 @@
 import socket
 
 def get_ip() -> str:
-    return input("Enter your partener IP: ")
+    return input("Enter your partener IP (should be IPv4): ")
 
 def get_port():
     while True:
@@ -13,9 +13,9 @@ def get_port():
             continue
     return int(port)
 
-def create_sending_socket(destination_ip: str, PORT: int):
+def create_sending_socket(dest_ip: str, dest_port: int):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((destination_ip, PORT))
+    s.connect((dest_ip, dest_port))
     return s
 
 def create_receving_socket(PORT):
@@ -23,4 +23,3 @@ def create_receving_socket(PORT):
     s.bind(('', PORT))
     s.listen(1)  
     return s
-

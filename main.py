@@ -1,9 +1,11 @@
 import threading
 import time
 import establishing_connection
-import receving_side
-import sending_side
+from prompt_toolkit import prompt
+from prompt_toolkit.patch_stdout import patch_stdout
 
+
+# =========================[Establishing the Connection]=========================
 
 ask_user = ["Create chatroom.", "Join to chatroom."]
 while True:
@@ -42,12 +44,40 @@ while True:
         time.sleep(1)
         continue
 
-def income():
-    print(f"receving from {dest_ip}:{dest_port}")
-    receving_side.receving_massege(recever_socket, True)
+# ================================[Start Masseging]==============================
 
-def outcome():
-    sending_side.sending_massege(sender_socket, True)
+def receving_massege(recever_socket):
+    conn, addr = recever_socket.accept()
+    with patch_stdout():
+        print(f"conn: {conn}\naddr: {addr}")
 
-threading.Thread(target=income).start()
-outcome()
+    while True:
+        data = conn.recv(1024)
+        if data:
+            with patch_stdout():
+                print(f"<<-| {data.decode("utf-8")}")
+        elif not data:
+            break
+
+    conn.close()
+    recever_socket.close()
+    with patch_stdout():
+        print("Your Partiner are closed.")
+
+
+def sending_massege(sender_socket):
+    while True:
+        user_input = prompt(">->> ")
+
+        if not user_input:  
+            break
+        elif user_input:
+            sender_socket.send(user_input.encode('utf-8'))
+        else:
+            print("<<Something went wrong..>>")
+    sender_socket.close()
+    print("You have closed.")
+
+
+threading.Thread(target=receving_massege, args=(recever_socket,)).start()
+sending_massege(sender_socket)

@@ -28,7 +28,7 @@ Depending on your operating system, you can install `python` and `prompt_toolkit
 
 - **Debian/Ubuntu:**
   ```bash
-  sudo apt update -y && apt install python3 python3-prompt_toolkit
+  sudo apt update -y && sudo apt install python3 python3-prompt_toolkit
   ```
 
 - **Arch Linux (Pacman):**
